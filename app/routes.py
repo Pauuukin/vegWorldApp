@@ -1,8 +1,24 @@
 import json
 from app import app
+#from datetime import datetime
+#from flask_json import FlaskJSON, JsonError, json_response, as_json
+
+@app.route('/')
+@app.route('/index')
+def index():
+    str = "Hello, World!"
+    return json.dumps(str)
 
 
-@app.route('/temp/version/api/posts')
+
+# @app.route('/get_time')
+# def get_time():
+#     now = datetime.utcnow()
+#     return json_response(time=now)
+#
+
+
+@app.route('/posts')
 def posts():
     posts = [
         {
@@ -30,10 +46,10 @@ def posts():
             'photo': 'когда-нибудь будет'
         }
     ]
-    return json.dump(posts)
+    return json.dumps(posts)
 
 
-@app.route('/temp/version/api/user/id')
+@app.route('/user/id')
 def user():
     user = {
         'idUser' : 128,
@@ -45,4 +61,4 @@ def user():
         'aboutMe': 'some text; some text; some text; some text; some text; some text; ',
     }
 
-    return json.dump(user)
+    return json.dumps(user)
