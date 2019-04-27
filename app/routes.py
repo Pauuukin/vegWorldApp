@@ -1,7 +1,6 @@
 import json
 from app import app
-#from datetime import datetime
-#from flask_json import FlaskJSON, JsonError, json_response, as_json
+
 
 @app.route('/')
 @app.route('/index')
@@ -47,6 +46,7 @@ def posts():
         }
     ]
     return json.dumps(posts)
+
 
 
 @app.route('/user/id')
