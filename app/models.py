@@ -13,6 +13,7 @@ class User(db.Model):
     aboutMe = db.Column(db.Text(600))
     dateOfBirth = db.Column(db.Date)
     dateOfReg = db.Column(db.DateTime, index = True, default = datetime.utcnow)
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
 
     def __repr__(self):
@@ -24,6 +25,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     parent_id = db.Column(db.Integer)
+    posts = db.relationship('Post', backref='category', lazy='dynamic')
 
 
     def __repr__(self):
@@ -34,6 +36,7 @@ class Status(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(256))
     text = db.Column(db.Text(500))
+    posts = db.relationship('Post', backref='status', lazy='dynamic')
 
     def __repr__(self):
         """Сообщает, как печатать объект класса"""
@@ -49,3 +52,7 @@ class Post(db.Model):
     photo = db.Column(db.Text(500))
     status_id = db.Column(db.Integer, db.ForeignKey('status.id'))
     timestamp = db.Column(db.DateTime, index = True, default = datetime.utcnow)
+
+    def __repr__(self):
+        """Сообщает, как печатать объект класса"""
+        return 'Status {}'.format(self.text)
